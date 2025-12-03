@@ -20,9 +20,6 @@ totalInvalidSum = 0
 for start,end in ranges:
     for num in range(start, end+1):
         if isInvalidId(num):
-            totalInvalidSum += 1
+            totalInvalidSum += num
 
 print(f"Answer: {totalInvalidSum}")
-
-# print("Ranges Parsed: ", len(ranges))
-# print(ranges)
