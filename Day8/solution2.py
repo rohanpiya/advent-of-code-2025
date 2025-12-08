@@ -26,7 +26,6 @@ while i < n:
         j += 1
     i += 1
 
-
 pairs.sort()
 parent = []
 size = []
@@ -40,34 +39,35 @@ def find(a):
         a = parent[a]
     return a
 
+# new union returns true if it actually merged two different roots
 def union(a, b):
     a2 = find(a)
     b2 = find(b)
     if a2 == b2:
-        return None
+        return False
     if size[a2] < size[b2]:
         parent[a2] = b2
         size[b2] += size[a2]
     else:
         parent[b2] = a2
         size[a2] += size[b2]
+    return True
 
+comp = n
 k = 0
-while k < 1000 and k < len(pairs):
+finalPairA = None
+finalPairB = None
+
+while comp > 1 and k < len(pairs):
     dist, a, b = pairs[k]
-    union(a, b)
+    merged = union(a, b)
+    if merged:
+        comp -= 1
+        finalPairA = a
+        finalPairB = b
     k += 1
 
-circuit_sizes = {}
 
-i = 0
-while i < n:
-    root = find(i)
-    if root not in circuit_sizes:
-        circuit_sizes[root] = 0
-    circuit_sizes[root] += 1
-    i += 1
+multX = pts[finalPairA][0] * pts[finalPairB][0]
+print(multX)
 
-sizes = sorted(circuit_sizes.values(), reverse=True)
-mult = sizes[0] * sizes[1] * sizes[2]
-print(mult)
