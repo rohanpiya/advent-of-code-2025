@@ -31,8 +31,7 @@ while True:
 
     if not removals:
         break
-
-    # remove them
+    
     for r, c in removals:
         grid[r][c] = '.'
 
